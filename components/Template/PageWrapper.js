@@ -1,5 +1,6 @@
 import Nav from './Nav';
 import Footer from './Footer';
+import '../../styles/styles.scss';
 
 class PageWrapper extends React.Component {
     render() {
