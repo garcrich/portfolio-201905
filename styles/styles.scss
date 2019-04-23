@@ -1,1 +1,7 @@
 @import "./normalize";
+
+$playfair: 'Playfair Display', serif;
+$montserrate: 'Montserrat', sans-serif;
+* {
+    font-family: $playfair;
+}
