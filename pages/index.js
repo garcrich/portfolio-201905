@@ -1,8 +1,18 @@
 import PageWrapper from '../components/Template/PageWrapper';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col'
+
 
 const Index = () => (
     <PageWrapper>
-        <div>Hello Next.js</div>
+        <Container>
+            <Row>
+                <Col lg={4}>
+                <h2>Hello Next.js</h2>
+                </Col>
+            </Row>
+        </Container>
     </PageWrapper>
   )
   
