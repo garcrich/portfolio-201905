@@ -10,6 +10,8 @@ app.prepare()
 .then(() => {
   const server = express();
 
+
+  
   server.get('/api/shows', (req,res) => {
       console.log('We made it!');
       res.end();

@@ -3,9 +3,7 @@ import Footer from './Footer';
 import '../../styles/styles.scss';
 import Head from 'next/head';
 
-class PageWrapper extends React.Component {
-    render() {
-        return (
+const PageWrapper = (props) => (
             <React.Fragment>
                 <Head>
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Playfair+Display:400,900" rel="stylesheet" />
@@ -17,11 +15,9 @@ class PageWrapper extends React.Component {
                     />
                 </Head>
                 <Nav />
-                {this.props.children}
+                {props.children}
                 <Footer />
             </React.Fragment>
         )
-    }
-}
-
+        
 export default PageWrapper;
