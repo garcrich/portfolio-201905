@@ -4,40 +4,45 @@ import axios from 'axios';
 import API_KEYS from '../API_KEYS';
 
 const YouTube = () => {
-  // Declare a new state variable, which we'll call "count"
-  const [count, setCount] = useState(0);
-  const [img, setString] = useState({
-      img: '',
-      height: '',
-      width: ''
-  });
+  const [youTubeVideos, setYouTubeVideos] = useState();
 
     useEffect(() => {
-        axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=UCul78U9NKBYHyqnhQfqUXmg&key=${API_KEYS.YOUTUBE}`)
+        axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&channelId=UCul78U9NKBYHyqnhQfqUXmg&key=${API_KEYS.YOUTUBE}`)
         .then((response)=> {
-            console.log(response);
-            const items = response.data.items;
-            setString({
-                img: items[0].snippet.thumbnails.standard.url,
-                // width: items[0].snippet.thumbnails.standard.width,
-                // height: items[0].snippet.thumbnails.standard.height,
-
-                //VIDEO url is made from videoID
-                
-                //https://www.youtube.com/watch?v=${videoId}
-                //"videoId": "123123asdsad12"
+            const videosObj = response.data.items;
+            const videos = videosObj.map(video => {
+              return (
+                {
+                  videoData: video.snippet,
+                  videoID: video.id.videoId
+                }
+              )
+            });
+            setYouTubeVideos({
+              videos
             })
-        }).catch(function (error) { 
+          }).catch(function (error) { 
             console.log(error)
-        })
-    }, [])
-
-  return (
-    <div>
-        {count}
-        <img src={img.img}  alt=""/>
+          })
+        }, [])
         
-    </div>
+        return (
+
+          <div>
+            {console.log("youTubeVideo State",youTubeVideos)}
+            {youTubeVideos && (youTubeVideos.videos).map((video) => {
+              const {publishedAt, thumbnails, title} = video.videoData;
+              return (
+              <div key={publishedAt}>
+                <img src={thumbnails.medium.url} alt=""/>
+                <h3>{title}</h3>
+                {/* MUST FIGURE OUT ONLOADING FOR ALL CONTENT */}
+                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${video.videoID}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+              </div>
+              )
+            }
+          )}
+          </div>
   )
 }
 
