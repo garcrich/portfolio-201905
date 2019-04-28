@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Footer = () => (
     <ul>
         <li>
@@ -6,9 +8,9 @@ const Footer = () => (
         <li>
             <a href="/skills">Twitter</a>
         </li>
-        <li>
+        <p>
             <a href="/work-history">LinkedIn</a>
-        </li>
+        </p>
     </ul>
 )
 
